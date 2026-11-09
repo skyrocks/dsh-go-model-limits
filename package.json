@@ -1,0 +1,80 @@
+{
+  "name": "@skyrocks/dsh-go-model-limits",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness plugin: 在模型选择列表中为 OpenCode GO 模型显示 Monthly limit（月度额度）",
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./typert": "./typert.host.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "limits.js",
+    "typert.host.js",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "scripts",
+    "test",
+    "docs"
+  ],
+  "engines": {
+    "node": ">=18",
+    "dsh": ">=0.2.1-rc.3 <0.3.0"
+  },
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-api-gateway",
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-model-selection"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/schemastery": "~3.18.5",
+    "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.2"
+  },
+  "author": "skyrocks (https://github.com/skyrocks)",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "client-plugin",
+    "opencode",
+    "opencode-go",
+    "model",
+    "monthly-limit",
+    "quota"
+  ],
+  "scripts": {
+    "sync": "node scripts/sync-limits.mjs",
+    "check": "node scripts/sync-limits.mjs --check",
+    "test": "node test/smoke.mjs && node test/manifest.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skyrocks/dsh-go-model-limits.git"
+  },
+  "homepage": "https://github.com/skyrocks/dsh-go-model-limits#readme",
+  "bugs": {
+    "url": "https://github.com/skyrocks/dsh-go-model-limits/issues"
+  }
+}

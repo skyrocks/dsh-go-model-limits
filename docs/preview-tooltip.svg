@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320" role="img" aria-label="月度额度标签的悬浮详情示意图">
+  <title>月度额度标签的悬浮详情</title>
+  <defs>
+    <filter id="tip-shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000000" flood-opacity="0.14"/>
+    </filter>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#000000" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      .ui { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .title { font-size: 12px; font-weight: 600; fill: #1f2329; }
+      .line { font-size: 11.5px; fill: #4b5057; }
+      .foot { font-size: 10px; fill: #9aa0a6; }
+      .tag { font-size: 10.5px; fill: #8a8f98; }
+    </style>
+  </defs>
+
+  <rect width="760" height="320" fill="#f6f7f9"/>
+
+  <!-- menu row underneath -->
+  <rect x="100" y="196" width="560" height="76" rx="10" fill="#ffffff" stroke="#e6e8eb" filter="url(#card-shadow)"/>
+  <text class="ui" x="124" y="222" font-size="10.5" font-weight="600" letter-spacing=".06em" fill="#9aa0a6">OPENCODE GO</text>
+  <text class="ui" x="124" y="248" font-size="13.5" fill="#1f2329">DeepSeek V4.1 Flash</text>
+  <rect x="300" y="234" width="68" height="18" rx="5" fill="#ecfdf3"/>
+  <text class="ui tag" x="334" y="246.5" text-anchor="middle" fill="#1f2329">$100/月</text>
+
+  <!-- tooltip -->
+  <path d="M326 196l8 8 8-8z" fill="#ffffff"/>
+  <rect x="180" y="48" width="304" height="148" rx="10" fill="#ffffff" stroke="#e6e8eb" filter="url(#tip-shadow)"/>
+  <text class="ui title" x="200" y="74">OpenCode GO 月度额度（Go 套餐）</text>
+  <line x1="200" y1="86" x2="464" y2="86" stroke="#f0f1f3"/>
+
+  <text class="ui line" x="200" y="108">Go：<tspan font-weight="600" fill="#1f2329">$100</tspan></text>
+  <text class="ui line" x="200" y="128">Go Plus：<tspan font-weight="600" fill="#1f2329">$200</tspan></text>
+  <text class="ui line" x="200" y="148">Go Teams：<tspan font-weight="600" fill="#1f2329">$105</tspan></text>
+  <line x1="200" y1="162" x2="464" y2="162" stroke="#f0f1f3"/>
+  <text class="ui foot" x="200" y="181">数据：opencode.ai 文档 · 2026-11-09（实时）</text>
+
+  <text class="ui" x="100" y="306" font-size="11" fill="#9aa0a6">示意图：悬浮显示当前套餐与三档对照；额度随文档更新，标签只在列表行出现。</text>
+</svg>

@@ -204,7 +204,7 @@ test("GO 模型行显示月度额度；非 GO / trigger / 未知模型不显示"
     placement: "option",
   });
   assert.equal(textOf(mid), "GLM-5.3-Flash $60/月");
-  assert.equal(find(mid, "dsh-gml-limit").props.style["--dsh-gml-c-light"], "#c2410c");
+  assert.equal(find(mid, "dsh-gml-limit").props.style["--dsh-gml-c-light"], "#2563eb");
 
   // $20 与 $15 也必须是不同颜色（相邻价格不共用配色）。
   const twenty = render({
@@ -212,7 +212,7 @@ test("GO 模型行显示月度额度；非 GO / trigger / 未知模型不显示"
     model: { id: "minimax-m3.1-flash", name: "MiniMax M3.1 Flash" },
     placement: "option",
   });
-  assert.equal(find(twenty, "dsh-gml-limit").props.style["--dsh-gml-c-light"], "#1d4ed8");
+  assert.equal(find(twenty, "dsh-gml-limit").props.style["--dsh-gml-c-light"], "#c2410c");
   assert.notEqual(
     find(twenty, "dsh-gml-limit").props.style["--dsh-gml-c-light"],
     find(cheap, "dsh-gml-limit").props.style["--dsh-gml-c-light"],

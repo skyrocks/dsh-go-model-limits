@@ -46,8 +46,8 @@
 
   <!-- row 3 -->
   <text class="ui name" x="148" y="212.5">GLM-5.3-Flash</text>
-  <rect x="250" y="199" width="56" height="18" rx="5" fill="#fff1e8"/>
-  <text class="ui tag" x="278" y="211.5" text-anchor="middle" fill="#c2410c">$60/月</text>
+  <rect x="250" y="199" width="56" height="18" rx="5" fill="#eef2ff"/>
+  <text class="ui tag" x="278" y="211.5" text-anchor="middle" fill="#2563eb">$60/月</text>
 
   <!-- row 4 -->
   <text class="ui name" x="148" y="250.5">Gemini 4 Argon</text>
@@ -67,5 +67,5 @@
   <text class="ui name" x="148" y="406.5">DeepSeek-V4-Pro</text>
 
   <text class="ui caption" x="100" y="486">示意图：额度只出现在 opencode-go 分组的模型行；官方账户等其他 provider 不受影响。</text>
-  <text class="ui caption" x="100" y="506">颜色：每个价格值一种颜色　<tspan fill="#d1242f">● $15</tspan>　<tspan fill="#a21caf">● $30</tspan>　<tspan fill="#c2410c">● $60</tspan>　<tspan fill="#047857">● $100</tspan>　<tspan fill="#4c1d95">● 无限</tspan></text>
+  <text class="ui caption" x="100" y="506">颜色：每个价格值一种颜色　<tspan fill="#d1242f">● $15</tspan>　<tspan fill="#a21caf">● $30</tspan>　<tspan fill="#2563eb">● $60</tspan>　<tspan fill="#047857">● $100</tspan>　<tspan fill="#4c1d95">● 无限</tspan></text>
 </svg>

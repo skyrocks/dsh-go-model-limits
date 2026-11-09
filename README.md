@@ -71,7 +71,7 @@
 dsh plugin --profile desktop add github:skyrocks/dsh-go-model-limits
 
 # tarball（绝对路径）
-dsh plugin --profile desktop add /Users/you/Downloads/skyrocks-dsh-go-model-limits-0.1.1.tgz
+dsh plugin --profile desktop add /Users/you/Downloads/skyrocks-dsh-go-model-limits-0.1.2.tgz
 
 # 本地目录（开发调试）
 dsh plugin --profile desktop add /Users/you/dsh-go-model-limits

@@ -4,6 +4,13 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.1.2] - 2026-11-09
+
+### Changed
+
+- Show `$60` in blue and `$20` in orange, so the common Go prices read as red / orange / magenta /
+  blue / green instead of sharing warm tones.
+
 ## [0.1.1] - 2026-11-09
 
 ### Changed

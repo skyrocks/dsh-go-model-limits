@@ -78,7 +78,7 @@ no changed name, no changed badge.
 dsh plugin --profile desktop add github:skyrocks/dsh-go-model-limits
 
 # tarball (absolute path)
-dsh plugin --profile desktop add /Users/you/Downloads/skyrocks-dsh-go-model-limits-0.1.1.tgz
+dsh plugin --profile desktop add /Users/you/Downloads/skyrocks-dsh-go-model-limits-0.1.2.tgz
 
 # local directory (development)
 dsh plugin --profile desktop add /Users/you/dsh-go-model-limits

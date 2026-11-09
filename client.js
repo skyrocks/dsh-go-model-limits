@@ -655,11 +655,11 @@ window.__ModuleLoader__.load({
     // 15 个已知价格覆盖 Go / Go Plus / Go Teams 的全部档位；未知新价格回退到按值散列的色相。
     const PRICE_PALETTE = [
       { light: "#d1242f", dark: "#ff7b72" }, // 15
-      { light: "#1d4ed8", dark: "#93c5fd" }, // 20
+      { light: "#c2410c", dark: "#fdba74" }, // 20
       { light: "#0f766e", dark: "#5eead4" }, // 25
       { light: "#a21caf", dark: "#f0abfc" }, // 30
       { light: "#7e22ce", dark: "#d8b4fe" }, // 35
-      { light: "#c2410c", dark: "#fdba74" }, // 60
+      { light: "#2563eb", dark: "#93c5fd" }, // 60
       { light: "#0e7490", dark: "#67e8f9" }, // 65
       { light: "#4338ca", dark: "#a5b4fc" }, // 80
       { light: "#b91c1c", dark: "#fca5a5" }, // 90

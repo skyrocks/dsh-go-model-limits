@@ -184,7 +184,8 @@ test("GO 模型行显示月度额度；非 GO / trigger / 未知模型不显示"
   assert.equal(textOf(flash), "DeepSeek V4.1 Flash $100/月");
   const tag = find(flash, "dsh-gml-limit");
   assert.ok(tag);
-  assert.equal(tag.props["data-tier"], "high");
+  assert.equal(tag.props["data-kind"], "priced");
+  assert.equal(tag.props.style["--dsh-gml-c-light"], "#047857");
   assert.match(tag.props.title, /Go：\$100/);
   assert.match(tag.props.title, /Go Plus：\$200/);
   assert.match(tag.props.title, /Go Teams：\$105/);
@@ -195,7 +196,7 @@ test("GO 模型行显示月度额度；非 GO / trigger / 未知模型不显示"
     placement: "option",
   });
   assert.equal(textOf(cheap), "GLM-5.3 $15/月");
-  assert.equal(find(cheap, "dsh-gml-limit").props["data-tier"], "low");
+  assert.equal(find(cheap, "dsh-gml-limit").props.style["--dsh-gml-c-light"], "#d1242f");
 
   const mid = render({
     provider: go,
@@ -203,7 +204,29 @@ test("GO 模型行显示月度额度；非 GO / trigger / 未知模型不显示"
     placement: "option",
   });
   assert.equal(textOf(mid), "GLM-5.3-Flash $60/月");
-  assert.equal(find(mid, "dsh-gml-limit").props["data-tier"], "mid");
+  assert.equal(find(mid, "dsh-gml-limit").props.style["--dsh-gml-c-light"], "#c2410c");
+
+  // $20 与 $15 也必须是不同颜色（相邻价格不共用配色）。
+  const twenty = render({
+    provider: go,
+    model: { id: "minimax-m3.1-flash", name: "MiniMax M3.1 Flash" },
+    placement: "option",
+  });
+  assert.equal(find(twenty, "dsh-gml-limit").props.style["--dsh-gml-c-light"], "#1d4ed8");
+  assert.notEqual(
+    find(twenty, "dsh-gml-limit").props.style["--dsh-gml-c-light"],
+    find(cheap, "dsh-gml-limit").props.style["--dsh-gml-c-light"],
+  );
+
+  // $30 与 $60 必须是不同颜色（用户反馈过这两个之前撞色）。
+  const thirty = render({
+    provider: go,
+    model: { id: "gemini-4-argon", name: "Gemini 4 Argon" },
+    placement: "option",
+  });
+  const thirtyColor = find(thirty, "dsh-gml-limit").props.style["--dsh-gml-c-light"];
+  assert.equal(thirtyColor, "#a21caf");
+  assert.notEqual(thirtyColor, find(mid, "dsh-gml-limit").props.style["--dsh-gml-c-light"]);
 
   const free = render({
     provider: go,
@@ -211,7 +234,9 @@ test("GO 模型行显示月度额度；非 GO / trigger / 未知模型不显示"
     placement: "option",
   });
   assert.equal(textOf(free), "Beam Free 无限");
-  assert.equal(find(free, "dsh-gml-limit").props["data-tier"], "unlimited");
+  const freeTag = find(free, "dsh-gml-limit");
+  assert.equal(freeTag.props["data-kind"], "unlimited");
+  assert.equal(freeTag.props.style, undefined);
 
   const other = render({
     provider: { id: "deepseek-account", name: "DeepSeek" },

@@ -8,7 +8,7 @@
 - 包名：`@skyrocks/dsh-go-model-limits`
 - 仓库名：`dsh-go-model-limits`
 - 插件行 id：`go-model-limits`
-- 版本：`0.1.0`
+- 版本：`0.1.1`
 
 ## 2. 发布前检查
 
@@ -36,7 +36,7 @@ ls -l docs/preview-menu.png docs/preview-tooltip.png
 ```sh
 git remote add origin git@github.com:skyrocks/dsh-go-model-limits.git
 git push -u origin main
-git push origin v0.1.0
+git push origin v0.1.1
 ```
 
 如果机器上没登录过 GitHub CLI：
@@ -44,15 +44,15 @@ git push origin v0.1.0
 ```sh
 gh auth login
 gh repo create skyrocks/dsh-go-model-limits --public --source=. --remote=origin --push
-git push origin v0.1.0
+git push origin v0.1.1
 ```
 
 ## 4. Release
 
 ```sh
-npm pack                    # 生成 skyrocks-dsh-go-model-limits-0.1.0.tgz
-gh release create v0.1.0 ./skyrocks-dsh-go-model-limits-0.1.0.tgz \
-  --title "v0.1.0" --generate-notes
+npm pack                    # 生成 skyrocks-dsh-go-model-limits-0.1.1.tgz
+gh release create v0.1.1 ./skyrocks-dsh-go-model-limits-0.1.1.tgz \
+  --title "v0.1.1" --generate-notes
 ```
 
 也可以在网页上创建 Release，正文直接用 `CHANGELOG.md` 的对应段落。

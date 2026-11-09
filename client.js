@@ -63,6 +63,8 @@ window.__ModuleLoader__.load({
     const DEFAULT_PLAN = "go";
     const PLAN_ORDER = ["go", "go-plus", "go-teams"];
     const PLAN_LABELS = {"go": "Go", "go-plus": "Go Plus", "go-teams": "Go Teams"};
+    /** 所有出现过的价格值（升序）；每个值在客户端有独立颜色。 */
+    const PRICE_ORDER = [15, 20, 25, 30, 35, 60, 65, 80, 90, 100, 105, 120, 180, 200, 240];
     /** 兜底快照：Host 尚未返回线上数据时使用。 */
     const LIMITS = {
       "go": {
@@ -645,9 +647,29 @@ window.__ModuleLoader__.load({
     const LIMITS_META = {
       "source": "https://opencode.ai/docs/console/go.md",
       "modelsSource": "https://opencode.ai/inference/go/v1/models",
-      "generatedAt": "2026-11-09T03:00:21.381Z"
+      "generatedAt": "2026-11-09T03:28:17.466Z"
     };
     // <<< generated:limits
+
+    // 每个价格值一种颜色，顺序与 generated 区块的 PRICE_ORDER 一致。
+    // 15 个已知价格覆盖 Go / Go Plus / Go Teams 的全部档位；未知新价格回退到按值散列的色相。
+    const PRICE_PALETTE = [
+      { light: "#d1242f", dark: "#ff7b72" }, // 15
+      { light: "#1d4ed8", dark: "#93c5fd" }, // 20
+      { light: "#0f766e", dark: "#5eead4" }, // 25
+      { light: "#a21caf", dark: "#f0abfc" }, // 30
+      { light: "#7e22ce", dark: "#d8b4fe" }, // 35
+      { light: "#c2410c", dark: "#fdba74" }, // 60
+      { light: "#0e7490", dark: "#67e8f9" }, // 65
+      { light: "#4338ca", dark: "#a5b4fc" }, // 80
+      { light: "#b91c1c", dark: "#fca5a5" }, // 90
+      { light: "#047857", dark: "#6ee7b7" }, // 100
+      { light: "#be123c", dark: "#fda4af" }, // 105
+      { light: "#0369a1", dark: "#7dd3fc" }, // 120
+      { light: "#4d7c0f", dark: "#bef264" }, // 180
+      { light: "#6d28d9", dark: "#c4b5fd" }, // 200
+      { light: "#a16207", dark: "#fde047" }, // 240
+    ];
 
     const DICT = {
       zh: {
@@ -671,11 +693,10 @@ window.__ModuleLoader__.load({
     };
 
     const CSS = [
-      ".dsh-gml-limit{display:inline-block;margin-left:6px;padding:1px 5px;border-radius:5px;font-size:10.5px;line-height:14px;vertical-align:1px;white-space:nowrap;font-variant-numeric:tabular-nums;}",
-      ".dsh-gml-limit[data-tier=\"low\"]{color:var(--dsw-alias-state-warn-label,#b45309);background:rgba(230,162,60,.16);}",
-      ".dsh-gml-limit[data-tier=\"mid\"]{color:var(--dsw-alias-state-business-primary,#2563eb);background:rgba(77,107,254,.12);}",
-      ".dsh-gml-limit[data-tier=\"high\"]{color:var(--dsw-alias-state-success-primary,#15803d);background:rgba(34,197,94,.13);}",
-      ".dsh-gml-limit[data-tier=\"unlimited\"]{color:#8b5cf6;background:rgba(139,92,246,.14);}",
+      ".dsh-gml-limit{display:inline-block;margin-left:6px;padding:1px 5px;border-radius:5px;font-size:10.5px;line-height:14px;vertical-align:1px;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--dsh-gml-c-light,#8a8f98);background:rgba(127,127,127,.12);background:color-mix(in srgb,var(--dsh-gml-c-light,#8a8f98) 14%,transparent);}",
+      "@media (prefers-color-scheme:dark){.dsh-gml-limit{color:var(--dsh-gml-c-dark,#cbd5e1);background:color-mix(in srgb,var(--dsh-gml-c-dark,#cbd5e1) 20%,transparent);}}",
+      ".dsh-gml-limit[data-kind=\"unlimited\"]{color:#4c1d95;background:linear-gradient(90deg,rgba(244,114,182,.20),rgba(96,165,250,.20),rgba(52,211,153,.20));}",
+      "@media (prefers-color-scheme:dark){.dsh-gml-limit[data-kind=\"unlimited\"]{color:#ede9fe;}}",
       ".dsh-gml-badge{display:inline-block;margin:0 2px;padding:0 4px;border-radius:4px;font-size:10px;line-height:14px;vertical-align:1px;white-space:nowrap;color:var(--dsw-alias-label-secondary,#6b7280);background:var(--dsw-alias-bg-module-platform,rgba(127,127,127,.12));border:1px solid var(--dsw-alias-border-l1,rgba(127,127,127,.2));}",
     ].join("");
 
@@ -780,12 +801,14 @@ window.__ModuleLoader__.load({
       return t("tag.monthly", { amount: `$${entry.usd}` });
     }
 
-    /** 月度额度分档：高额度绿、中额度蓝、低额度橙、无限紫。 */
-    function tierOf(entry) {
-      if (entry.unlimited) return "unlimited";
-      if (entry.usd >= 100) return "high";
-      if (entry.usd >= 30) return "mid";
-      return "low";
+    /** 每个价格值取一个固定颜色；无限单独用渐变。 */
+    function colorOf(entry) {
+      if (entry.unlimited) return null;
+      const index = PRICE_ORDER.indexOf(entry.usd);
+      if (index >= 0 && index < PRICE_PALETTE.length) return PRICE_PALETTE[index];
+      // 官方新增了还没同步进 PRICE_ORDER 的价格：按值散列一个色相，避免所有新价格同色。
+      const hue = Math.round((Number(entry.usd) * 137.508) % 360);
+      return { light: `hsl(${hue} 60% 34%)`, dark: `hsl(${hue} 70% 68%)` };
     }
 
     /** 悬浮提示：当前套餐 + 三档对照 + 数据日期。 */
@@ -852,6 +875,7 @@ window.__ModuleLoader__.load({
         : undefined;
       // 只在可选择的模型行显示额度；trigger / 根菜单当前值保持干净。
       if (entry !== undefined && placement === "option") {
+        const color = colorOf(entry);
         children.push(
           " ",
           React.createElement(
@@ -859,7 +883,13 @@ window.__ModuleLoader__.load({
             {
               className: "dsh-gml-limit",
               key: "limit",
-              "data-tier": tierOf(entry),
+              "data-kind": entry.unlimited ? "unlimited" : "priced",
+              style: color === null
+                ? undefined
+                : {
+                    "--dsh-gml-c-light": color.light,
+                    "--dsh-gml-c-dark": color.dark,
+                  },
               title: tooltip(entry, model, t),
             },
             tagText(entry, t),

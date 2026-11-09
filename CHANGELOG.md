@@ -4,6 +4,13 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-11-09
+
+### Changed
+
+- Colour every distinct monthly-limit value separately instead of four shared ranges, so `$30`
+  and `$60` no longer render in the same colour. `Unlimited` keeps a dedicated gradient.
+
 ## [0.1.0] - 2026-11-09
 
 ### Added

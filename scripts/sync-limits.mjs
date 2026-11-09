@@ -48,12 +48,24 @@ export function renderDataBlock(data, meta) {
   };
   /** 用两空格缩进 JSON，并把续行对齐到区块的缩进。 */
   const embed = (value) => JSON.stringify(value, null, "  ").split("\n").join("\n    ");
+  // 按价格值去重排序，客户端据此给每个价格分配固定颜色（而不是按区间合并）。
+  const prices = new Set();
+  for (const plan of PLAN_ORDER) {
+    const bucket = data.plans?.[plan];
+    if (!bucket) continue;
+    for (const entry of Object.values(bucket.byId)) {
+      if (entry && !entry.unlimited && typeof entry.usd === "number") prices.add(entry.usd);
+    }
+  }
+  const priceOrder = [...prices].sort((a, b) => a - b);
   const lines = [
     `${BEGIN_MARKER} (scripts/sync-limits.mjs)`,
     "/** 默认展示的套餐；Go Plus / Go Teams 用户改成对应 key 即可。 */",
     `const DEFAULT_PLAN = ${JSON.stringify(DEFAULT_PLAN)};`,
     `const PLAN_ORDER = ${JSON.stringify(PLAN_ORDER).replaceAll(",", ", ")};`,
     `const PLAN_LABELS = ${JSON.stringify(PLAN_LABELS).replaceAll(",", ", ").replaceAll(":", ": ")};`,
+    "/** 所有出现过的价格值（升序）；每个值在客户端有独立颜色。 */",
+    `const PRICE_ORDER = ${JSON.stringify(priceOrder).replaceAll(",", ", ")};`,
     "/** 兜底快照：Host 尚未返回线上数据时使用。 */",
     `const LIMITS = ${embed(data.plans)};`,
     `const LIMITS_META = ${embed(info)};`,

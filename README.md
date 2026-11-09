@@ -28,7 +28,7 @@
 ## 为什么用它
 
 - **选模型前先看额度**：不用去 OpenCode 官网翻价格表，也不用记哪个模型是 `$15`、哪个是 `$100`。
-- **按额度分档上色**：`<$30` 橙、`$30–$99` 蓝、`≥$100` 绿、无限紫，一眼分清“小额度”和“大额度”。
+- **每个价格值一种颜色**：`$15`、`$30`、`$60`、`$100` … 各自独立配色，不按区间合并；`无限` 用渐变。
 - **只影响 GO 分组**：标签只出现在 `opencode-go` 的模型行；官方账户、其他 provider 的名字和 badge 原样保留。
 - **悬浮看三档**：Go / Go Plus / Go Teams 的额度一起列出，换套餐时不用重新查文档。
 - **自动跟进官方调整**：Host 启动后抓官方文档，缓存 6 小时；抓不到时用上次数据或内置快照。
@@ -71,7 +71,7 @@
 dsh plugin --profile desktop add github:skyrocks/dsh-go-model-limits
 
 # tarball（绝对路径）
-dsh plugin --profile desktop add /Users/you/Downloads/skyrocks-dsh-go-model-limits-0.1.0.tgz
+dsh plugin --profile desktop add /Users/you/Downloads/skyrocks-dsh-go-model-limits-0.1.1.tgz
 
 # 本地目录（开发调试）
 dsh plugin --profile desktop add /Users/you/dsh-go-model-limits
@@ -135,7 +135,7 @@ npm run check    # 只对比线上数据，不写文件
 | 根菜单的「模型」当前值 | 不显示额度 |
 | 模型 badge（如 Free / 新） | 保留原位置与样式（优先使用 DSH 的 Tag 组件） |
 | 未知/新模型（数据里没有） | 不显示标签，不影响其他行 |
-| 额度颜色 | `< $30` 橙、`$30–$99` 蓝、`≥ $100` 绿、`无限` 紫 |
+| 额度颜色 | 每个价格值一种颜色（不再按区间合并）；`无限` 用渐变 |
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "name": "@skyrocks/dsh-go-model-limits",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DeepSeek Harness plugin: 在模型选择列表中为 OpenCode GO 模型显示 Monthly limit（月度额度）",
   "license": "MIT",
   "type": "module",

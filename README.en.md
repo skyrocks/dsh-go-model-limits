@@ -30,8 +30,8 @@ no changed name, no changed badge.
 
 - **See the budget before switching**: no OpenCode dashboard, no pricing page, no guessing which
   model is `$15` and which is `$100`.
-- **Colour-coded by size**: `<$30` amber, `$30–$99` blue, `≥$100` green, unlimited violet —
-  small and large budgets are distinguishable at a glance.
+- **One colour per price**: `$15`, `$30`, `$60`, `$100` … each gets its own colour instead of a
+  shared band; `Unlimited` uses a gradient.
 - **GO rows only**: tags appear on `opencode-go` models; official account and other providers keep
   their original name and badge.
 - **All three plans on hover**: Go, Go Plus and Go Teams limits together, so a plan change does not
@@ -78,7 +78,7 @@ no changed name, no changed badge.
 dsh plugin --profile desktop add github:skyrocks/dsh-go-model-limits
 
 # tarball (absolute path)
-dsh plugin --profile desktop add /Users/you/Downloads/skyrocks-dsh-go-model-limits-0.1.0.tgz
+dsh plugin --profile desktop add /Users/you/Downloads/skyrocks-dsh-go-model-limits-0.1.1.tgz
 
 # local directory (development)
 dsh plugin --profile desktop add /Users/you/dsh-go-model-limits
@@ -144,7 +144,7 @@ Each tooltip states the current source: `live`, `refresh failed, using last data
 | Root menu current value | No tag |
 | Model badge (e.g. Free / New) | Kept in its original position and style (prefers DSH's Tag component) |
 | Unknown / new model (not in data) | No tag; other rows unaffected |
-| Tag colour | `< $30` amber, `$30–$99` blue, `≥ $100` green, `Unlimited` violet |
+| Tag colour | One colour per distinct price value (no shared bands); `Unlimited` uses a gradient |
 
 ---
 

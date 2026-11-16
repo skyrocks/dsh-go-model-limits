@@ -13,6 +13,7 @@ no changed name, no changed badge.
 ![dsh](https://img.shields.io/badge/DSH-0.2.1--rc.3%20line-4d6bfe)
 ![node](https://img.shields.io/badge/node-%3E%3D18-339933)
 ![dependencies](https://img.shields.io/badge/runtime%20deps-0-6bd586)
+[![CI](https://github.com/skyrocks/dsh-go-model-limits/actions/workflows/ci.yml/badge.svg)](https://github.com/skyrocks/dsh-go-model-limits/actions/workflows/ci.yml)
 
 <p align="center">
   <img src="docs/preview-menu.png" alt="Monthly limit tags in the model picker" width="760">

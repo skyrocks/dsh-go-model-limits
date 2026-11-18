@@ -41,12 +41,26 @@ for (const file of [
   "CHANGELOG.md",
   "LICENSE",
   "scripts/sync-limits.mjs",
-  "test/smoke.mjs",
-  "test/manifest.mjs",
 ]) {
   assert.ok(manifest.files.includes(file.split("/")[0]), `files 缺少 ${file.split("/")[0]}`);
   assert.ok(existsSync(join(root, file)), `仓库里缺少 ${file}`);
 }
+// 测试留在仓库里，但不随包分发：自动化商店会把包内测试里的 node:fs 当成运行时权限信号。
+for (const file of ["test/smoke.mjs", "test/manifest.mjs"]) {
+  assert.ok(existsSync(join(root, file)), `仓库里缺少 ${file}`);
+}
+assert.ok(!manifest.files.includes("test"), "files 不应包含 test");
+
+// 图标与本地化名称随包分发。
+for (const file of ["icon.svg", "locale/zh.json", "locale/en.json"]) {
+  assert.ok(existsSync(join(root, file)), `仓库里缺少 ${file}`);
+}
+for (const entry of ["icon.svg", "locale/*.json"]) {
+  assert.ok(manifest.files.includes(entry), `files 缺少 ${entry}`);
+}
+assert.equal(manifest.exports?.["./icon"], "./icon.svg");
+assert.equal(manifest.exports?.["./locale/*.json"], "./locale/*.json");
+
 assert.equal(manifest.main, "./index.js");
 assert.equal(manifest.exports?.["."], "./index.js");
 assert.equal(manifest.exports?.["./typert"], "./typert.host.js");

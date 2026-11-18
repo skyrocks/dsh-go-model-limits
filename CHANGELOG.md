@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4
+
+- 修复 `test/manifest.mjs` 里「`files` 必须包含 test」的旧断言：测试仍留在仓库，但不再随包分发；同时补上图标与 `locale/*.json` 的 manifest 断言。
+
 ## 0.1.3
 
 - 补上插件图标与本地化名称：新增 `icon.svg`（`exports["./icon"]`）和 `locale/{zh,en}.json`

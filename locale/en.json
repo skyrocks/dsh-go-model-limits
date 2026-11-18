@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Model monthly limits",
+    "description": "Tags each GO model in the model picker with its official monthly limit, coloured by price tier."
+  }
+}
